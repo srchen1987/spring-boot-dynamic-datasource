@@ -1,10 +1,10 @@
 package com.pttl.mybatis.datasource.forceconfigure;
 
-import com.pttl.mybatis.datasource.DynamicDataSources;
-import com.pttl.mybatis.datasource.DynamicRoutingDataSource;
 import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.mapping.DatabaseIdProvider;
 import org.apache.ibatis.plugin.Interceptor;
@@ -41,14 +41,17 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 
+import com.pttl.mybatis.datasource.DynamicDataSources;
+import com.pttl.mybatis.datasource.DynamicRoutingDataSource;
+
 /**
  * 
-* @ClassName: MybatisAutoConfiguration 
-* @Description: mybatis的配置 获取SqlSessionFactory
-* @author jackson.song
-* @mail suxuan696@gmail.com
-* @date 2020年6月3日
-*
+ * @ClassName: MybatisAutoConfiguration
+ * @Description: mybatis的配置 获取SqlSessionFactory
+ * @author jackson.song
+ * @mail suxuan696@gmail.com
+ * @date 2020年6月3日
+ *
  */
 @Configuration
 @Component
@@ -64,7 +67,7 @@ public class MybatisAutoConfiguration {
 	private final DatabaseIdProvider databaseIdProvider;
 
 	private final List<ConfigurationCustomizer> configurationCustomizers;
-	DynamicRoutingDataSource dataSource = new DynamicRoutingDataSource();
+	DynamicRoutingDataSource dataSource = DynamicRoutingDataSource.getInstance();
 	@Autowired
 	private DynamicDataSources dataSources;
 

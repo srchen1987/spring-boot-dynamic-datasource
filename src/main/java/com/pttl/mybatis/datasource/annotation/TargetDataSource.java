@@ -7,15 +7,15 @@ import java.lang.annotation.Target;
 
 /**
  * 
-* @ClassName: TargetDataSource 
-* @Description: 目标数据源 value则为数据源名称
-* @author jackson.song
-* @mail suxuan696@gmail.com
-* @date 2020年6月3日
-*
+ * @ClassName: TargetDataSource
+ * @Description: 目标数据源 value则为数据源名称
+ * @author jackson.song
+ * @mail suxuan696@gmail.com
+ * @date 2020年6月3日
+ *
  */
-@Target({ElementType.METHOD})
+@Target({ ElementType.METHOD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface TargetDataSource {
-  String value() default "";
+	String value() default "";
 }
