@@ -2,7 +2,7 @@ package com.pttl.mybatis.datasource;
 
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.annotation.TransactionManagementConfigurer;
 
 /**
@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 public class TransactionManagementConfigurerBean implements TransactionManagementConfigurer {
 
 	@Override
-	public PlatformTransactionManager annotationDrivenTransactionManager() {
+	public TransactionManager annotationDrivenTransactionManager() {
 		DataSourceTransactionManager dtm = new DataSourceTransactionManager();
 		dtm.setDataSource(DynamicRoutingDataSource.getInstance());
 		return dtm;
