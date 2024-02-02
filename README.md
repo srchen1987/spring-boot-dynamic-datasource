@@ -54,5 +54,3 @@ public interface UserMapper {
 }
 
 ```
-**注意事项：**
-@ComponentScan({"其他包","com.pttl.mybatis.datasource"}) 这个注解是需要的 如果没有不会生效

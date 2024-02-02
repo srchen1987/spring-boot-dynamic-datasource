@@ -1,0 +1,3 @@
+com.pttl.mybatis.datasource.DynamicDataSources
+com.pttl.mybatis.datasource.TransactionManagementConfigurerBean
+com.pttl.mybatis.datasource.forceconfigure.MybatisAutoConfiguration

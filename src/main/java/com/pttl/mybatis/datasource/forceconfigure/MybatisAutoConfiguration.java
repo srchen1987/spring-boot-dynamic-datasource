@@ -2,7 +2,6 @@ package com.pttl.mybatis.datasource.forceconfigure;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -14,6 +13,7 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.boot.autoconfigure.ConfigurationCustomizer;
 import org.mybatis.spring.boot.autoconfigure.MybatisProperties;
+import org.mybatis.spring.boot.autoconfigure.MybatisProperties.CoreConfiguration;
 import org.mybatis.spring.boot.autoconfigure.SpringBootVFS;
 import org.mybatis.spring.mapper.ClassPathMapperScanner;
 import org.mybatis.spring.mapper.MapperFactoryBean;
@@ -43,6 +43,8 @@ import org.springframework.util.StringUtils;
 
 import com.pttl.mybatis.datasource.DynamicDataSources;
 import com.pttl.mybatis.datasource.DynamicRoutingDataSource;
+
+import jakarta.annotation.PostConstruct;
 
 /**
  * 
@@ -101,9 +103,11 @@ public class MybatisAutoConfiguration {
 		factory.setVfs(SpringBootVFS.class);
 		if (StringUtils.hasText(this.properties.getConfigLocation()))
 			factory.setConfigLocation(this.resourceLoader.getResource(this.properties.getConfigLocation()));
-		org.apache.ibatis.session.Configuration configuration = this.properties.getConfiguration();
-		if (configuration == null && !StringUtils.hasText(this.properties.getConfigLocation()))
-			configuration = new org.apache.ibatis.session.Configuration();
+		CoreConfiguration coreConfiguration = this.properties.getConfiguration();
+		if (coreConfiguration == null && !StringUtils.hasText(this.properties.getConfigLocation()))
+			coreConfiguration = new CoreConfiguration();
+		org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
+		coreConfiguration.applyTo(configuration);
 		if (configuration != null && !CollectionUtils.isEmpty(this.configurationCustomizers))
 			for (ConfigurationCustomizer customizer : this.configurationCustomizers)
 				customizer.customize(configuration);
